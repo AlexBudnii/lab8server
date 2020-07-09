@@ -28,7 +28,7 @@ public class Receiver implements Runnable {
     //public static final String PASSWORD = "ppi439";
     public static SocketChannel socketChannel = null;
     public static String[] sarray;
-    public static Flat flat;
+    public static Person person;
     public static long g;
     public static Long j;
     public static long p;
