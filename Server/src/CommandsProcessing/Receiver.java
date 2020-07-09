@@ -20,12 +20,10 @@ import PersonData.*;
 import Auth.Authorization;
 import Auth.ComplicatedObject;
 public class Receiver implements Runnable {
-    public static final String URL = "jdbc:postgresql://localhost:1337/PersonLists";
-    public static final String USERNAME = "postgres";
-    public static final String PASSWORD = "abcd05200";
-    //public static final String URL = "jdbc:postgresql://pg:5432/studs";
-    //public static final String USERNAME = "s286551";
-    //public static final String PASSWORD = "ppi439";
+  
+    public static final String URL = "jdbc:postgresql://pg:5432/studs";
+    public static final String USERNAME = "s286551";
+    public static final String PASSWORD = "ppi439";
     public static SocketChannel socketChannel = null;
     public static String[] sarray;
     public static Person person;
