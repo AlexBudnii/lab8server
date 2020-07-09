@@ -3,7 +3,7 @@ package PersonData;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
-public class CollectionOfFlats implements Serializable{
+public class CollectionOfPersons implements Serializable{
     public static LocalDateTime time=LocalDateTime.now();;
     public static HashSet<Flat> collection = new HashSet<>();
     public static HashSet<Flat> MyCollection = new HashSet<>();
