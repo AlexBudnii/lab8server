@@ -13,7 +13,7 @@ import java.util.Date;
 import static Auth.ReceiveDataFromServer.locker;
 
 public class Commands {
-static Flat f;
+static Person f;
 
     static {
         try {
@@ -38,8 +38,8 @@ static Flat f;
                 "\n"+"clear - очистить коллекцию " + "\n"+"script - скрипт"+"\n"+
                 "exit - завершить программу без сохранения в файл" + "\n" + "removeGreater - удалить все эелементы, превышающие заданный"+"\n"+
                 "removeLower - удалить все элементы, которые меньше заданного"+"\n"+ "history - вывести список последних команд" + "\n"+
-                "removeByHouseAge - удалить элементы, у которых значения поля house эквивалентны заданному"+"\n"+
-                "countByRooms - вывести количество элементов, значение которых равно заданному"+"\n";
+                "removeByWorkExperience - удалить элементы, у которых значения поля removeByWorkExperience эквивалентны заданному"+"\n"+
+                "countBySalary - вывести количество элементов, значение которых равно заданному"+"\n";
         return help;
 
     }
@@ -75,9 +75,9 @@ static Flat f;
                 myTime = myTime.replaceAll("T","    ");
                 break;
         }
-        if (CollectionOfFlats.collection.size() != 0){
-            info = "Размер коллекции: " + CollectionOfFlats.collection.size() + "\n"
-                    + "Тип коллекции: " + CollectionOfFlats.collection.getClass() + "\n"
+        if (CollectionOfPersons.collection.size() != 0){
+            info = "Размер коллекции: " + CollectionOfPersons.collection.size() + "\n"
+                    + "Тип коллекции: " + CollectionOfPersons.collection.getClass() + "\n"
                     + "Дата инициализации: " + myTime + "\n";
         }
         else  info = "Коллекция пуста";
@@ -121,19 +121,19 @@ static Flat f;
                 String name = resultSet.getString("name");
                 long id = resultSet.getInt("id");
                 java.util.Date creationDate = resultSet.getDate("creationDate");
-                Double area = resultSet.getDouble("area");
-                Long numberOfRooms = resultSet.getLong("rooms");
+                Double area = resultSet.getDouble("height");
+                Long numberOfRooms = resultSet.getLong("age");
                 String furnishData = resultSet.getString("furnish");
                 String transportData = resultSet.getString("transport");
                 String viewData = resultSet.getString("view");
                 double x = resultSet.getDouble("x");
                 double y = resultSet.getDouble("y");
-                String nameOfHouse = resultSet.getString("house_name");
-                Integer ageOfHouse = resultSet.getInt("house_age");
-                Integer liftsOfHouse = resultSet.getInt("house_lifts");
+                String nameOfHouse = resultSet.getString("job");
+                Integer ageOfHouse = resultSet.getInt("workExperience");
+                Integer liftsOfHouse = resultSet.getInt("salary");
                 String login = resultSet.getString("login");
-                Flat flatflat = new Flat(name, id,  new Coordinates(x,y), area, numberOfRooms, setFurnish(furnishData), setView(viewData), setTransport(transportData),
-                        new House(nameOfHouse, ageOfHouse, liftsOfHouse), login);
+                Person pers = new Person(name, id,  new Coordinates(x,y), height, age, setFurnish(furnishData), setView(viewData), setTransport(transportData),
+                        new Job(job, workExperience, salary), login);
                 CollectionOfFlats.collection.add(flatflat);
             }
         } catch (SQLException | AllException | IOException e) {
@@ -201,11 +201,11 @@ static Flat f;
 
 
 
-    public static String add(Flat flatat) throws SQLException {
+    public static String add(Person person) throws SQLException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
         String answer = "";
-        String sqlStatement = "INSERT INTO PersonLists ( creationDate,name, area,rooms,furnish,transport,view,x,y,house_name,house_age,house_lifts,login) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String sqlStatement = "INSERT INTO PersonLists ( creationDate,name, height,age,furnish,transport,view,x,y,job,workExperience,salary,login) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try  {
             connection = DriverManager.getConnection(Receiver.URL, Receiver.USERNAME, Receiver.PASSWORD);
             preparedStatement = connection.prepareStatement(sqlStatement);
